@@ -24,7 +24,7 @@ Route::post('/signup', SignupController::class)->name('signup');
 // TODO: change password reset route (https://laravel.com/docs/10.x/passwords#resetting-the-password)
 Route::get('/confirm/account/{token}', function (string $token) {
     return Inertia::render('Auth/ConfirmAccount', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+})->middleware('guest')->name('confirm.account');
 
 Route::get('/password/reset/{token}', function (string $token) {
     return Inertia::render('Auth/ResetPassword', ['token' => $token]);
