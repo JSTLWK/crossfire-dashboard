@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+#app {
+    @apply h-full; /* feel free to add more classes */
+}
+
+@font-face {
+    font-family: bender;
+    src: url('fonts/bender_black.otf');
+}
