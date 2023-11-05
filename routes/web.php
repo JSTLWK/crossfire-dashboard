@@ -28,7 +28,7 @@ Route::get('/confirm/account/{token}', function (string $token) {
 
 Route::get('/password/reset/{token}', function (string $token) {
     return Inertia::render('Auth/ResetPassword', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+})->middleware('guest')->name('password.reset-token');
 
 Route::middleware([
     'auth:sanctum',
