@@ -1,6 +1,16 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import Welcome from "@/Components/Welcome.vue";
+import { usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
+import Steps from "@/Components/Banners/Steps.vue";
+
+
+const { auth } = usePage().props;
+
+const user = computed(() => {
+    return auth?.user.name;
+});
+
 </script>
 
 <template>
@@ -11,11 +21,18 @@ import Welcome from "@/Components/Welcome.vue";
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
+        <div class="pl-12 py-12 pr-12">
+            <div class="grid grid-cols-2">
+                <div>
+                    <h2 class="text-3xl font-bender">Welcome to Your Command Center, {{ user }}</h2>
+                    <p class="max-w-4xl">Get ready for an adrenaline-pumping journey through the chaotic world of Reserve. This
+                        is your personal battle command, where you can sign up, form your squad, and stay on top of the
+                        ever-changing action. It's not just a dashboard; it's your lifeline in the wilds of Crossfire.</p>
                 </div>
+
+<!--                <div>-->
+<!--                    <Steps />-->
+<!--                </div>-->
             </div>
         </div>
     </AppLayout>

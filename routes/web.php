@@ -3,6 +3,8 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StepController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
 
@@ -37,4 +39,12 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/step/first-not-completed', [StepController::class, 'firstToComplete'])->name('step.first-to-complete');
+    Route::get('/step/completed', [StepController::class, 'completed'])->name('step.completed');
+    Route::get('/step/{step}', [StepController::class, 'step'])->name('step.progress');
+    Route::post('/step/{step}', [StepController::class, 'store'])->name('step.store');
+
+    Route::resource('team', TeamController::class);
+
 });

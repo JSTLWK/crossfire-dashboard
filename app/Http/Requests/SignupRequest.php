@@ -11,7 +11,7 @@ class SignupRequest extends FormRequest
         return [
             'email'    => ['required', 'email', 'unique:users,email'],
             'username' => ['required'],
-            'teamName' => ['required', 'unique:tournament_teams,name'],
+            'teamName' => ['required', 'unique:teams,name'],
         ];
     }
 

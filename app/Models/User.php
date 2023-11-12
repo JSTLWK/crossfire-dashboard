@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Notifications\PasswordResetNotification;
 use App\Notifications\ConfirmAccountNotification;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,7 +58,13 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'complete_signup',
     ];
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     public function sendConfirmAccountNotification($token)
     {
@@ -66,5 +74,14 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordResetNotification($token));
+    }
+
+    public function steps(): HasMany
+    {
+        return $this->hasMany(UserStep::class, 'user_id');
+    }
+    public function getCompleteSignupAttribute()
+    {
+        return $this->steps()->count() === Step::count();
     }
 }
